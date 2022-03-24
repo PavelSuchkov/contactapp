@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -28,8 +28,10 @@ export const AuthNavigator = () => {
 
   const AuthStack = createStackNavigator();
 
+
+
   return (
-    <AuthStack.Navigator>
+    <AuthStack.Navigator screenOptions={{ headerShown: Platform.OS === 'ios' }}>
       <AuthStack.Screen name={LOGIN} component={Login}/>
       <AuthStack.Screen name={REGISTER} component={Register}/>
     </AuthStack.Navigator>
