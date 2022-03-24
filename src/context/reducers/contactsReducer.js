@@ -1,4 +1,4 @@
-const contacts = (state, {type, payload}) => {
+const contactsReducer = (state, {type, payload}) => {
   switch (type) {
     case 'GET_CONTACTS':
       return state;
@@ -8,4 +8,4 @@ const contacts = (state, {type, payload}) => {
   }
 };
 
-export default contacts;
+export default contactsReducer;

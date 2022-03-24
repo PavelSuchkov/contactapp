@@ -1,16 +1,22 @@
-import { SafeAreaView, StatusBar, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { DrawerNavigator } from './DrawerNavigator';
-import { HomeNavigator } from './HomeNavigator';
 import { AuthNavigator } from './AuthNavigator';
+import { GlobalContext } from '../context/Provider';
 
 
 export const AppNavContainer = () => {
-  const isLoggedIn = true;
+  // const isLoggedIn = true;
+
+  const {
+    authState: { isLoggedIn },
+  } = useContext(GlobalContext);
+
+  console.log(isLoggedIn);
+
   return (
     <NavigationContainer>
-      {isLoggedIn ? <DrawerNavigator/> : <AuthNavigator/>}
+      {isLoggedIn ? <DrawerNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
