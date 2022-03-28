@@ -7,12 +7,12 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 5,
-    // alignItems: 'center',
-    marginTop: 5
+    marginVertical: 5,
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
   },
-  textInput: {
-    flex: 1,
-    width: '100%'
+  loaderSection: {
+   flexDirection: 'row'
   },
   inputContainer: {
     paddingVertical: 12
