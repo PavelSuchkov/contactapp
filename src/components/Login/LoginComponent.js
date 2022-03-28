@@ -24,10 +24,10 @@ export const LoginComponent = () => {
         <View style={styles.form}>
           <Input
             label='Username'
-            // changeText={(text) => changeText(text)}
-            // value={value}
             placeholder='Enter Username'
             iconPosition='right'
+            // changeText={(text) => changeText(text)}
+            // value={value}
             // error={'This field is required'}
           />
 
@@ -35,10 +35,10 @@ export const LoginComponent = () => {
             label='Password'
             placeholder='Enter Password'
             secureTextEntry={true}
-            // changeText={(text) => changeText(text)}
-            // value={value}
             icon={<Text>SHOW </Text>}
             iconPosition='right'
+            // changeText={(text) => changeText(text)}
+            // value={value}
             // error={'This field is required'}
           />
           <CustomButton title='Submit' primary />

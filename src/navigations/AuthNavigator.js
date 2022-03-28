@@ -7,10 +7,10 @@ import { Login } from '../screens/login/Login';
 import { Register } from '../screens/register/Register';
 
 
-// const LoginComponent = () => {
+// const Login = () => {
 //   return (<View>
 //     <Text>
-//       Hi from LoginComponent
+//       Hi from Login
 //     </Text>
 //   </View>);
 // };

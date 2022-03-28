@@ -33,10 +33,13 @@ export const CustomButton = ({
                       onPress={onPress}
                       style={[styles.wrapper, { backgroundColor: getBgcolor() }]}>
       <View style={[styles.loaderSection]}>
-        {loading &&  <ActivityIndicator  color={ primary ? colors.grey : colors.primary}/> }
+        {loading &&
+          <ActivityIndicator color={primary ? colors.grey : colors.primary} />}
         {title &&
-          <Text style={{ color: disabled ? 'black' : colors.white,
-          paddingLeft: loading ? 5 : 0}}>{title}</Text>}
+          <Text style={{
+            color: disabled ? 'black' : colors.white,
+            paddingLeft: loading ? 5 : 0,
+          }}>{title}</Text>}
       </View>
 
     </TouchableOpacity>
