@@ -28,6 +28,8 @@ export const CustomButton = ({
     }
   };
 
+  console.log('button ', disabled);
+
   return (
     <TouchableOpacity disabled={disabled}
                       onPress={onPress}

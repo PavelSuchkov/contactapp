@@ -24,12 +24,13 @@ export const Input = ({
     }
   };
   const getBorderColor = () => {
+    if (error) {
+      return colors.danger;
+    }
     if (focused){
       return colors.primary
     }
-      if (error) {
-        return colors.danger;
-      } else return colors.grey;
+      else return colors.grey;
   };
 
   const [focused, setFocused] = useState(false);

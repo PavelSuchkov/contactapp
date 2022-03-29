@@ -4,7 +4,6 @@ import colors from '../../../assets/theme/colors';
 export default StyleSheet.create({
   wrapper: {
     height: 42,
-    borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 5,
     marginVertical: 5,
