@@ -14,6 +14,11 @@ export const Register = () => {
       console.log(err);
     })
   }, [])
+  // useFocusEffect(
+  //   useCallback(() => {
+  //   clearAuthState()(authDispatch)
+  //   }, [data])
+  // )
 
   const onChange = ({ name, value }) => {
     setForm({ ...form, [name]: value });
