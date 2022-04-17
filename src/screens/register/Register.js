@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import { RegisterComponent } from '../../components/signup/RegisterComponent';
 import axiosInstance from "../../helpers/axiosInterceptor";
+import { useNavigation } from '@react-navigation/native';
+import { GlobalContext } from '../../context/Provider';
+// import { useFocusEffect } from '@react-navigation/native';
+// import { clearAuthState } from '../../context/auth/register';
 
 export const Register = () => {
 
   const [form, setForm] = useState({});
+  const {navigate} = useNavigation();
   const [errors, setErrors] = useState({});
+  const {
+    authDispatch,
+    authState: {error, loading, data},
+  } = useContext(GlobalContext);
 
-  console.log('form ===> ', form);
 
   useEffect(() => {
     axiosInstance.post('/contacts').catch(err => {
       console.log(err);
     })
   }, [])
+
+
   // useFocusEffect(
-  //   useCallback(() => {
-  //   clearAuthState()(authDispatch)
-  //   }, [data])
+  //   // console.log(err);
+  //   clearAuthState()
   // )
 
   const onChange = ({ name, value }) => {
