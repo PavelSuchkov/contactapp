@@ -37,9 +37,9 @@ export const LoginComponent = () => {
             secureTextEntry={true}
             icon={<Text>SHOW </Text>}
             iconPosition='right'
-            // changeText={(text) => changeText(text)}
-            // value={value}
-            // error={'This field is required'}
+            changeText={(text) => changeText(text)}
+            value={value}
+            error={'This field is required'}
           />
           <CustomButton title='Submit' primary />
           <View style={styles.createSection}>
