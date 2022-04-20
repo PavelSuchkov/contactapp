@@ -32,10 +32,12 @@ const authReducer = (state, { type, payload }) => {
       };
 
     case CLEAR_AUTH_STATE:
+      console.log('CLEAR_AUTH_STATE ', state);
       return {
         ...state,
         loading: false,
         data: null,
+        error: null
       };
 
     default:

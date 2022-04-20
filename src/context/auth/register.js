@@ -5,13 +5,9 @@ import {
   REGISTER_LOADING,
   REGISTER_SUCCESS,
 } from '../../constants/actionTypes/actions';
-import { type } from 'yarn/lib/cli';
 
 export const clearAuthState = () => (dispatch) => {
-  dispatch({
-      type: CLEAR_AUTH_STATE
-    },
-  );
+  dispatch({ type: CLEAR_AUTH_STATE });
 };
 
 export default ({

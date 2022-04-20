@@ -15,6 +15,8 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
   };
 
   const { navigate } = useNavigation();
+
+  console.log('sdmsldm' , error);
   return (
     <Container>
       <Image width={70} height={70}
@@ -28,7 +30,9 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
 
         <View style={styles.form}>
 
-          { error && <Text>Something wrong</Text>}
+
+          { /*{ error && <Text>Something wrong</Text>}*/ }
+          { error?.error && <Text>{error.error}</Text>}
 
           <Input
             label="Username"
