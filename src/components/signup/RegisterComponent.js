@@ -2,12 +2,12 @@ import { Container } from '../common/container/Container';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Input } from '../common/input/Input';
 import { CustomButton } from '../common/button/CustomButton';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/routeNames';
 
-export const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
+export const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit }) => {
 
   const buttonDisabled = () => {
     return !!(errors.username || errors.firstName
@@ -28,59 +28,70 @@ export const RegisterComponent = ({ errors, form, onChange, onSubmit }) => {
 
         <View style={styles.form}>
 
+          { error && <Text>Something wrong</Text>}
+
           <Input
-            label='Username'
-            placeholder='Enter Username'
-            iconPosition='right'
+            label="Username"
+            placeholder="Enter Username"
+            iconPosition="right"
             changeText={(value) => onChange({
               name: 'username', value,
             })}
-            error={errors.username}
+            error={errors.username || error?.username?.[0]}
             value={form.username}
           />
           <Input
-            label='Firstname'
-            placeholder='Enter Username'
-            iconPosition='right'
+            label="Firstname"
+            placeholder="Enter Username"
+            iconPosition="right"
             changeText={(value) => onChange({
               name: 'firstName', value,
             })}
-            error={errors.firstName}
+            error={errors.firstName || error?.first_name?.[0]}
             value={form.firstName}
           />
 
           <Input
-            label='Lastname'
-            placeholder='Enter Lastname'
-            iconPosition='right'
+            label="Lastname"
+            placeholder="Enter Lastname"
+            iconPosition="right"
             changeText={(value) => onChange({
               name: 'lastName', value,
             })}
-            error={errors.lastName}
+            error={errors.lastName  || error?.first_name?.[0] }
+            value={form.lastName}
           />
 
           <Input
-            label='email'
-            placeholder='Enter email'
-            iconPosition='right'
+            label="email"
+            placeholder="Enter email"
+            iconPosition="right"
             changeText={(value) => onChange({
               name: 'email', value,
             })}
-            error={errors.email}
+            error={errors.email || error?.email?.[0]}
+            value={form.email}
+            autoCapitalize='none'
           />
 
           <Input
-            label='Password'
-            placeholder='Enter Password'
+            label="Password"
+            placeholder="Enter Password"
             secureTextEntry={true}
             icon={<Text>SHOW </Text>}
-            iconPosition='right'
+            iconPosition="right"
             changeText={(value) => onChange({
               name: 'password', value,
             })}
-            error={errors.password}
+            error={errors.password || error?.password?.[0]}
+            value={form.password}
           />
-          <CustomButton title='Submit' primary onPress={onSubmit} disabled={buttonDisabled()} />
+
+          <CustomButton title="Submit" primary
+                        onPress={onSubmit}
+                        disabled={buttonDisabled() || loading}
+                        loading={loading} />
+
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Already have account?</Text>
             <TouchableOpacity onPress={() => {

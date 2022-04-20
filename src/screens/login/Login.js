@@ -7,7 +7,7 @@ import { LoginComponent } from '../../components/Login/LoginComponent';
 
 export const Login = () => {
 
-  const [value, changeText] = useState();
+  // const [value, changeText] = useState();
 
   return (
   <LoginComponent/>
