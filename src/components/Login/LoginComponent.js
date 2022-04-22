@@ -2,15 +2,24 @@ import { Container } from '../common/container/Container';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Input } from '../common/input/Input';
 import { CustomButton } from '../common/button/CustomButton';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { REGISTER } from '../../constants/routeNames';
 import { Message } from '../common/message/Message';
+import { GlobalContext } from '../../context/Provider';
 
 export const LoginComponent = () => {
   const [value, changeText] = useState();
   const { navigate } = useNavigation();
+
+  const {
+    authDispatch,
+    authState: { error, loading, data },
+  } = useContext(GlobalContext);
+
+  console.log(data);
+
   return (
     <Container>
       <Image width={70} height={70}

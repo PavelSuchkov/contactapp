@@ -28,7 +28,8 @@ const authReducer = (state, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        error: payload.data,
+        error: payload,
+
       };
 
     case CLEAR_AUTH_STATE:

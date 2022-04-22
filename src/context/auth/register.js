@@ -10,13 +10,13 @@ export const clearAuthState = () => (dispatch) => {
   dispatch({ type: CLEAR_AUTH_STATE });
 };
 
-export default ({
+export const register =  ({
                   email,
                   password,
                   username,
                   firstName: first_name,
                   lastName: last_name,
-                }) => (dispatch) => {
+                }) => (dispatch) => (onSuccess) => {
 
   dispatch({ type: REGISTER_LOADING });
   axiosInstance.post('auth/register', {
@@ -31,12 +31,13 @@ export default ({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
-      console.log('response ', res.data);
-    }).catch(err => {
+      onSuccess(res.data);
+    }).catch((err) => {
     dispatch({
       type: REGISTER_FAILED,
-      payload: err.response ? err.response : { error: 'Something wrong' },
+      payload: err.response
+        ? err.response.data
+        : {error: 'Something went wrong, try again'},
     });
-    console.log('catch error', err.response.data);
   });
 }
