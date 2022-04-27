@@ -1,15 +1,56 @@
-import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View } from 'react-native';
-import { Container } from '../../components/common/container/Container';
-import { Input } from '../../components/common/input/Input';
-import { CustomButton } from '../../components/common/button/CustomButton';
+import React, { useContext, useState } from 'react';
 import { LoginComponent } from '../../components/Login/LoginComponent';
+import { useNavigation } from '@react-navigation/native';
+import { GlobalContext } from '../../context/Provider';
+import { loginUser } from '../../context/auth/loginUser';
+import { LOGIN } from '../../constants/routeNames';
 
 export const Login = () => {
 
-  // const [value, changeText] = useState();
+
+  const [form, setForm] = useState({});
+  // const { navigate } = useNavigation();
+  const [errors, setErrors] = useState({});
+  const {
+    authDispatch,
+    authState: { error, loading },
+  } = useContext(GlobalContext);
+
+
+  const onChange = ({ name, value }) => {
+    setForm({ ...form, [name]: value });
+    if (value) {
+      setErrors(prev => {
+        return { ...prev, [name]: null };
+      });
+      if (name === 'password') {
+        if (value.length < 6) {
+          setErrors(prev => {
+            return { ...prev, [name]: 'Minimum is 6 characters' };
+          });
+        } else if (value.length >= 6){
+          setErrors(prev => {
+            return { ...prev, [name]: null };
+          });
+        }
+      }
+    } else setErrors(prev => {
+      return { ...prev, [name]: 'This field is required' };
+    });
+  };
+  const onSubmit = () => {
+    debugger
+    if (form.username && form.password) {
+      loginUser(form)(authDispatch)((response) => console.log('success,', response))
+  }}
 
   return (
-  <LoginComponent/>
-  )
+    <LoginComponent onSubmit={onSubmit}
+                    onChange={onChange}
+                    form={form}
+                    errors={errors}
+                    error={error}
+                    loading={loading}
+    />
+  );
 };

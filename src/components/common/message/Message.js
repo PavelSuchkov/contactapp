@@ -46,7 +46,7 @@ export const Message = ({
 
             <Text style={{ color: colors.white }}>{message}</Text>
 
-            {retry && !typeof onDismiss === 'function' && (
+            {retry && !typeof onDismiss !== 'function' && (
               <TouchableOpacity onPress={retryFn}>
                 <Text style={{ color: colors.white }}>Retry</Text>
               </TouchableOpacity>

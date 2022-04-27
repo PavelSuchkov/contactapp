@@ -26,18 +26,13 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
 
         <Text style={styles.title}>Welcome to the RNContacts</Text>
         <Text style={styles.subTitle}>Create account</Text>
-
         <View style={styles.form}>
 
-
-          { /*{ error && <Text>Something wrong</Text>}*/}
           {error?.error && (
             <Message message={error?.error}
                      danger
                      retry
-                     retryFn={() => {
-                       console.log('error message clicked');
-                     }} />
+                     retryFn={() => onSubmit} />
           )}
 
           <Input
