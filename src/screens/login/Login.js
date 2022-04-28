@@ -1,15 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { LoginComponent } from '../../components/Login/LoginComponent';
-import { useNavigation } from '@react-navigation/native';
 import { GlobalContext } from '../../context/Provider';
 import { loginUser } from '../../context/auth/loginUser';
-import { LOGIN } from '../../constants/routeNames';
 
 export const Login = () => {
 
 
   const [form, setForm] = useState({});
-  // const { navigate } = useNavigation();
   const [errors, setErrors] = useState({});
   const {
     authDispatch,
@@ -39,7 +36,6 @@ export const Login = () => {
     });
   };
   const onSubmit = () => {
-    debugger
     if (form.username && form.password) {
       loginUser(form)(authDispatch)((response) => console.log('success,', response))
   }}

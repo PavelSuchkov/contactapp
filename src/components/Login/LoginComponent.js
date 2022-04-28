@@ -27,11 +27,6 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) =>
         <Text style={styles.title}>Welcome to the RNContacts</Text>
         <Text style={styles.subTitle}>Please Login here</Text>
 
-        {/*<Message*/}
-        {/*  onDismiss={() => { }}*/}
-        {/*  danger*/}
-        {/*  message="invalid credentials"/>*/}
-
         {error?.detail && (
           <Message message={error?.detail}
                    danger

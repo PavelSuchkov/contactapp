@@ -30,7 +30,8 @@ const authReducer = (state, { type, payload }) => {
         ...state,
         loading: false,
         data: payload,
-        isLogged: true
+        isLoggedIn: true,
+        error: null
       };
 
     case REGISTER_FAILED:
@@ -55,8 +56,6 @@ const authReducer = (state, { type, payload }) => {
     default:
       return state;
   }
-
-
 };
 
 export default authReducer;
