@@ -7,6 +7,9 @@ import { SETTINGS } from '../../constants/routeNames';
 
 export const SideMenu = ({ navigation }) => {
 
+  const logOutHandler = () => {
+    navigation.toggleDrawer();
+  }
 
   const menuItems = [
     {
@@ -17,7 +20,8 @@ export const SideMenu = ({ navigation }) => {
       },
     },
     {
-      icon: <Text>T</Text>, name: 'Logout'
+      icon: <Text>T</Text>, name: 'Logout',
+      onPress: logOutHandler
     },
   ];
 
