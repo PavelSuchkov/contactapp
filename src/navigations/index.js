@@ -10,7 +10,13 @@ import colors from '../assets/theme/colors';
 
 export const AppNavContainer = () => {
 
-  const [isAuth, setIsAuth] = useState();
+
+
+  const {
+    authState: { isLoggedIn },
+  } = useContext(GlobalContext);
+
+  const [isAuth, setIsAuth] = useState(isLoggedIn);
   const [authLoaded, setAuthLoaded] = useState(false);
 
   const getUser = async () => {
@@ -30,18 +36,16 @@ export const AppNavContainer = () => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [isLoggedIn]);
 
-  const {
-    authState: { isLoggedIn },
-  } = useContext(GlobalContext);
+
 
   return (
     <>
       {authLoaded ? (
           <NavigationContainer>
             {
-              isAuth || isLoggedIn
+              isAuth
                 ? <DrawerNavigator />
                 : <AuthNavigator />
             }

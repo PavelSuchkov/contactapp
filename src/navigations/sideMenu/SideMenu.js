@@ -3,24 +3,25 @@ import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-
 import { Container } from '../../components/common/container/Container';
 import styles from './styles';
 import { SETTINGS } from '../../constants/routeNames';
+import { logoutUser } from '../../context/auth/logoutUser';
 
 
-export const SideMenu = ({ navigation }) => {
+export const SideMenu = ( {navigation, authDispatch} ) => {
 
   const logOutHandler = () => {
     navigation.toggleDrawer();
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       {
         text: 'Cancel',
-        onPress: () => {
-
-        }
+        onPress: () => { },
+        style: 'cancel'
       },
       {
         text: 'Ok',
         onPress: () => {
-
-        }
+          logoutUser()(authDispatch)
+        },
+        style: 'destructive'
       }
     ])
   }
