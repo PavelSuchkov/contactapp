@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { Container } from '../../components/common/container/Container';
 import styles from './styles';
 import { SETTINGS } from '../../constants/routeNames';
@@ -9,6 +9,20 @@ export const SideMenu = ({ navigation }) => {
 
   const logOutHandler = () => {
     navigation.toggleDrawer();
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        onPress: () => {
+
+        }
+      },
+      {
+        text: 'Ok',
+        onPress: () => {
+
+        }
+      }
+    ])
   }
 
   const menuItems = [
@@ -17,6 +31,7 @@ export const SideMenu = ({ navigation }) => {
       name: 'Settings',
       onPress: () => {
         navigation.navigate(SETTINGS);
+
       },
     },
     {
