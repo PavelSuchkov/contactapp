@@ -6,6 +6,7 @@ import React from 'react';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/routeNames';
+import { Message } from '../common/message/Message';
 
 export const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit }) => {
 
@@ -15,20 +16,24 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
   };
 
   const { navigate } = useNavigation();
+
   return (
     <Container>
       <Image width={70} height={70}
              source={require('../../assets/images/logo.png')}
              style={styles.logoImage} />
-
       <View>
 
         <Text style={styles.title}>Welcome to the RNContacts</Text>
         <Text style={styles.subTitle}>Create account</Text>
-
         <View style={styles.form}>
 
-          { error && <Text>Something wrong</Text>}
+          {error?.error && (
+            <Message message={error?.error}
+                     danger
+                     retry
+                     retryFn={() => onSubmit} />
+          )}
 
           <Input
             label="Username"
@@ -58,7 +63,7 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
             changeText={(value) => onChange({
               name: 'lastName', value,
             })}
-            error={errors.lastName  || error?.first_name?.[0] }
+            error={errors.lastName || error?.first_name?.[0]}
             value={form.lastName}
           />
 
@@ -71,7 +76,7 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
             })}
             error={errors.email || error?.email?.[0]}
             value={form.email}
-            autoCapitalize='none'
+            autoCapitalize="none"
           />
 
           <Input

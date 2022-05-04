@@ -34,7 +34,7 @@ export const CustomButton = ({
                       style={[styles.wrapper, { backgroundColor: getBgcolor() }]}>
       <View style={[styles.loaderSection]}>
         {loading &&
-          <ActivityIndicator color={primary ? colors.grey : colors.primary} />}
+          <ActivityIndicator color={primary ? colors.white : colors.primary} />}
         {title &&
           <Text style={{
             color: disabled ? 'black' : colors.white,
