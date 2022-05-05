@@ -2,7 +2,7 @@ import { Container } from '../common/container/Container';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Input } from '../common/input/Input';
 import { CustomButton } from '../common/button/CustomButton';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { LOGIN } from '../../constants/routeNames';
@@ -11,10 +11,10 @@ import { Message } from '../common/message/Message';
 export const RegisterComponent = ({ errors, error, loading, form, onChange, onSubmit }) => {
 
   const buttonDisabled = () => {
-    return !!(errors.username || errors.firstName
-      || errors.lastName || errors.email || errors.password);
+    return !!(errors.username || errors.firstName || errors.lastName || errors.email || errors.password);
   };
 
+  const [isSecure, setIsSecure] = useState(true);
   const { navigate } = useNavigation();
 
   return (
@@ -28,12 +28,10 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
         <Text style={styles.subTitle}>Create account</Text>
         <View style={styles.form}>
 
-          {error?.error && (
-            <Message message={error?.error}
-                     danger
-                     retry
-                     retryFn={() => onSubmit} />
-          )}
+          {error?.error && (<Message message={error?.error}
+                                     danger
+                                     retry
+                                     retryFn={() => onSubmit} />)}
 
           <Input
             label="Username"
@@ -82,8 +80,13 @@ export const RegisterComponent = ({ errors, error, loading, form, onChange, onSu
           <Input
             label="Password"
             placeholder="Enter Password"
-            secureTextEntry={true}
-            icon={<Text>SHOW </Text>}
+            secureTextEntry={isSecure}
+            icon={
+              <TouchableOpacity
+                onPress={() => setIsSecure(prev => !prev)}>
+                <Text>{isSecure ? 'SHOW' : 'HIDE'}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             changeText={(value) => onChange({
               name: 'password', value,
