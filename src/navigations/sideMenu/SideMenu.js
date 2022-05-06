@@ -4,8 +4,7 @@ import { Container } from '../../components/common/container/Container';
 import styles from './styles';
 import { SETTINGS } from '../../constants/routeNames';
 import { logoutUser } from '../../context/auth/logoutUser';
-import Icon from 'react-native-vector-icons/Ionicons';
-import LogoutIcon from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from '../../components/common/icons/Icon';
 
 
 export const SideMenu = ( {navigation, authDispatch} ) => {
@@ -30,7 +29,8 @@ export const SideMenu = ( {navigation, authDispatch} ) => {
 
   const menuItems = [
     {
-      icon: <Icon name='settings-outline' size={25}/>,
+      // icon: <SettingsIcon name='settings-outline' size={25}/>,
+      icon: <Icon type='ionicon' name='settings-outline' size={25}/>,
       name: 'Settings',
       onPress: () => {
         navigation.navigate(SETTINGS);
@@ -38,7 +38,8 @@ export const SideMenu = ( {navigation, authDispatch} ) => {
       },
     },
     {
-      icon: <LogoutIcon name='logout' size={25}/>,
+      // icon: <LogoutIcon name='logout' size={25}/>,
+      icon: <Icon type='material' name='logout' size={25}/>,
       name: 'Logout',
       onPress: logOutHandler
     },

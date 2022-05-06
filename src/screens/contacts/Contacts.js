@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { Container } from '../../components/common/container/Container';
 import { useNavigation } from '@react-navigation/native';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import { Icon } from '../../components/common/icons/Icon';
 
 export const Contacts = () => {
 
@@ -13,7 +13,7 @@ export const Contacts = () => {
       headerLeft:
         () => (
           <TouchableOpacity onPress={() => toggleDrawer()}>
-           <MaterialIcon name='menu' size={30} style={{padding: 10}}/>
+           <Icon type='material' name='menu' size={30} style={{padding: 10}}/>
           </TouchableOpacity>
         ),
     });
