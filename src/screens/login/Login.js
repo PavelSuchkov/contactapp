@@ -1,13 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LoginComponent } from '../../components/Login/LoginComponent';
 import { GlobalContext } from '../../context/Provider';
 import { loginUser } from '../../context/auth/loginUser';
+import { useRoute } from '@react-navigation/native';
 
 export const Login = () => {
 
-
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
+  const [justSignedUp, setJustSignedUp] = useState(false);
+
+  // const route = useRoute();
+  const { params } = useRoute();
+
+  // console.log(route);
+
+  useEffect(() => {
+    if (params?.data)
+    {
+      console.log('params ===> ', params.data);
+      setForm({...form, username: params?.data.username})
+      setJustSignedUp(true)
+    }
+  }, [params])
+
   const {
     authDispatch,
     authState: { error, loading },
@@ -15,6 +31,7 @@ export const Login = () => {
 
 
   const onChange = ({ name, value }) => {
+    setJustSignedUp(false);
     setForm({ ...form, [name]: value });
     if (value) {
       setErrors(prev => {
@@ -25,7 +42,7 @@ export const Login = () => {
           setErrors(prev => {
             return { ...prev, [name]: 'Minimum is 6 characters' };
           });
-        } else if (value.length >= 6){
+        } else if (value.length >= 6) {
           setErrors(prev => {
             return { ...prev, [name]: null };
           });
@@ -37,8 +54,9 @@ export const Login = () => {
   };
   const onSubmit = () => {
     if (form.username && form.password) {
-      loginUser(form)(authDispatch)((response) => console.log('success,', response))
-  }}
+      loginUser(form)(authDispatch)((response) => console.log('success,', response));
+    }
+  };
 
   return (
     <LoginComponent onSubmit={onSubmit}
@@ -47,6 +65,7 @@ export const Login = () => {
                     errors={errors}
                     error={error}
                     loading={loading}
+                    justSignedUp={justSignedUp}
     />
   );
 };

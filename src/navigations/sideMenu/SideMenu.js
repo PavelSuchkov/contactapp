@@ -3,31 +3,34 @@ import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-
 import { Container } from '../../components/common/container/Container';
 import styles from './styles';
 import { SETTINGS } from '../../constants/routeNames';
+import { logoutUser } from '../../context/auth/logoutUser';
+import { Icon } from '../../components/common/icons/Icon';
 
 
-export const SideMenu = ({ navigation }) => {
+export const SideMenu = ( {navigation, authDispatch} ) => {
 
   const logOutHandler = () => {
     navigation.toggleDrawer();
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       {
         text: 'Cancel',
-        onPress: () => {
-
-        }
+        onPress: () => { },
+        style: 'cancel'
       },
       {
         text: 'Ok',
         onPress: () => {
-
-        }
+          logoutUser()(authDispatch)
+        },
+        style: 'destructive'
       }
     ])
   }
 
   const menuItems = [
     {
-      icon: <Text>T</Text>,
+      // icon: <SettingsIcon name='settings-outline' size={25}/>,
+      icon: <Icon type='ionicon' name='settings-outline' size={25}/>,
       name: 'Settings',
       onPress: () => {
         navigation.navigate(SETTINGS);
@@ -35,7 +38,9 @@ export const SideMenu = ({ navigation }) => {
       },
     },
     {
-      icon: <Text>T</Text>, name: 'Logout',
+      // icon: <LogoutIcon name='logout' size={25}/>,
+      icon: <Icon type='material' name='logout' size={25}/>,
+      name: 'Logout',
       onPress: logOutHandler
     },
   ];

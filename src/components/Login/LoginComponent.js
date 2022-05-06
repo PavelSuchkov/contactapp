@@ -9,13 +9,13 @@ import { REGISTER } from '../../constants/routeNames';
 import { Message } from '../common/message/Message';
 import { GlobalContext } from '../../context/Provider';
 
-export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) => {
-  // const [value, changeText] = useState();
+export const LoginComponent = ({ form, onChange, onSubmit, loading, errors, justSignedUp }) => {
+
   const { navigate } = useNavigation();
+  const [isSecure, setIsSecure] = useState(true);
 
   const {
-    // authDispatch,
-    authState: { error},
+    authState: { error },
   } = useContext(GlobalContext);
 
   return (
@@ -27,11 +27,18 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) =>
         <Text style={styles.title}>Welcome to the RNContacts</Text>
         <Text style={styles.subTitle}>Please Login here</Text>
 
+        {justSignedUp && (
+          <Message message="Account created successfully"
+                   success
+                   onDismiss={() => {
+                   }} />
+        )}
         {error?.detail && (
           <Message message={error?.detail}
                    danger
                    retry
-                   onDismiss
+                   onDismiss={() => {
+                   }}
                    retryFn={() => onSubmit()} />
         )}
 
@@ -50,8 +57,13 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) =>
           <Input
             label="Password"
             placeholder="Enter Password"
-            secureTextEntry={true}
-            icon={<Text>SHOW </Text>}
+            secureTextEntry={isSecure}
+            icon={
+              <TouchableOpacity
+                onPress={() => setIsSecure(prev => !prev)}>
+                <Text>{isSecure ? 'SHOW' : 'HIDE'}</Text>
+              </TouchableOpacity>
+            }
             iconPosition="right"
             changeText={(value) => onChange({
               name: 'password', value,
@@ -65,10 +77,10 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) =>
                         loading={loading}
                         onPress={onSubmit} />
           <View style={styles.createSection}>
-          <Text style={styles.infoText}>Need a new account?</Text>
-          <TouchableOpacity onPress={() => {
-            navigate(REGISTER);
-          }}>
+            <Text style={styles.infoText}>Need a new account?</Text>
+            <TouchableOpacity onPress={() => {
+              navigate(REGISTER);
+            }}>
               <Text style={styles.linkBtn}>Register</Text>
             </TouchableOpacity>
           </View>

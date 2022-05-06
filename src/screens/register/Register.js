@@ -15,11 +15,11 @@ export const Register = () => {
     authState: { error, loading, data },
   } = useContext(GlobalContext);
 
-  useEffect(() => {
-    if (data) {
-      navigate(LOGIN);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //
+  //   }
+  // }, [data]);
 
   useFocusEffect(
     useCallback(() => {

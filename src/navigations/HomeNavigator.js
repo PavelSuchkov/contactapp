@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { CONTACT_DETAIL, CONTACT_LIST, CREATE_CONTACT, SETTINGS } from '../constants/routeNames';
 import { Contacts } from '../screens/contacts/Contacts';
 import { ContactDetails } from '../screens/contactDetail/ContactDetails';
-import { CreateContact } from '../screens/Createcontact/CreateContact';
+import { CreateContact } from '../screens/createContact/CreateContact';
 import { Settings } from '../screens/settings/Settings';
 import { Text } from 'react-native';
 
