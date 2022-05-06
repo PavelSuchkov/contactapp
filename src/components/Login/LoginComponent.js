@@ -9,7 +9,7 @@ import { REGISTER } from '../../constants/routeNames';
 import { Message } from '../common/message/Message';
 import { GlobalContext } from '../../context/Provider';
 
-export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) => {
+export const LoginComponent = ({ form, onChange, onSubmit, loading, errors, justSignedUp }) => {
 
   const { navigate } = useNavigation();
   const [isSecure, setIsSecure] = useState(true);
@@ -27,11 +27,18 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors }) =>
         <Text style={styles.title}>Welcome to the RNContacts</Text>
         <Text style={styles.subTitle}>Please Login here</Text>
 
+        {justSignedUp && (
+          <Message message="Account created successfully"
+                   success
+                   onDismiss={() => {
+                   }} />
+        )}
         {error?.detail && (
           <Message message={error?.detail}
                    danger
                    retry
-                   onDismiss
+                   onDismiss={() => {
+                   }}
                    retryFn={() => onSubmit()} />
         )}
 

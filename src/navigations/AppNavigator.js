@@ -10,8 +10,6 @@ import colors from '../assets/theme/colors';
 
 export const AppNavContainer = () => {
 
-
-
   const {
     authState: { isLoggedIn },
   } = useContext(GlobalContext);
