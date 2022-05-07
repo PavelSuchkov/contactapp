@@ -7,10 +7,10 @@ import { Login } from '../screens/login/Login';
 import { Register } from '../screens/register/Register';
 
 
-// const Login = () => {
+// const login = () => {
 //   return (<View>
 //     <Text>
-//       Hi from Login
+//       Hi from login
 //     </Text>
 //   </View>);
 // };
