@@ -17,7 +17,7 @@ export const DrawerNavigator = () => {
   const { authDispatch } = useContext(GlobalContext);
 
   return (
-    <Drawer.Navigator drawerType="slide"
+    <Drawer.Navigator drawerType='back'
                       drawerContent={({navigation}) => getDrawerContent(navigation, authDispatch)
                       }>
       <Drawer.Screen name={HOME_NAVIGATOR} component={HomeNavigator} />
