@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LoginComponent } from '../../components/login/LoginComponent';
 import { GlobalContext } from '../../context/Provider';
-import { loginUser } from '../../context/auth/loginUser';
+import { loginUser } from '../../context/actions/auth/loginUser';
 import { useRoute } from '@react-navigation/native';
 
 export const Login = () => {

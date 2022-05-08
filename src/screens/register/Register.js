@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { RegisterComponent } from '../../components/signup/RegisterComponent';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { GlobalContext } from '../../context/Provider';
-import {register, clearAuthState}  from '../../context/auth/register';
+import {register, clearAuthState}  from '../../context/actions/auth/register';
 import { LOGIN } from '../../constants/routeNames';
 
 export const Register = () => {
