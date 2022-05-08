@@ -3,7 +3,7 @@ import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-
 import { Container } from '../../components/common/container/Container';
 import styles from './styles';
 import { SETTINGS } from '../../constants/routeNames';
-import { logoutUser } from '../../context/auth/logoutUser';
+import { logoutUser } from '../../context/actions/auth/logoutUser';
 import { Icon } from '../../components/common/icons/Icon';
 
 

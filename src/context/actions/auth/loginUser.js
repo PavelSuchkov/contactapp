@@ -1,10 +1,10 @@
-import axiosInstance from '../../helpers/axiosInterceptor';
+import axiosInstance from '../../../helpers/axiosInstance';
 import {
   CLEAR_AUTH_STATE,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGIN_LOADING,
-} from '../../constants/actionTypes/actions';
+} from '../../../constants/actionTypes/actions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const loginUser = ({

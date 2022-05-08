@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '../../components/common/icons/Icon';
 import { ContactsComponent } from '../../components/contacts/ContactsComponent';
-import { CustomButton } from '../../components/common/button/CustomButton';
+import { GlobalContext } from '../../context/Provider';
+import { getContacts } from '../../context/actions/contacts/getContacts';
 
 export const Contacts = () => {
 
   const { setOptions, toggleDrawer } = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
+  const {
+    contactsDispatch,
+    contactsState: {
+      getContacts: { data, loading }
+    },
+  } = useContext(GlobalContext);
+
+  // console.log('contactsState ===>  ', contactsState);
+
+  useEffect(() => {
+    getContacts()(contactsDispatch)
+  }, [])
 
   useEffect(() => {
     setOptions({
@@ -23,7 +36,11 @@ export const Contacts = () => {
 
   return (
     <View>
-      <ContactsComponent modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <ContactsComponent modalVisible={modalVisible}
+                         setModalVisible={setModalVisible}
+                         data={data}
+                         loading={loading}
+      />
     </View>
     // <Container>
     //   <Text>Hi from contacts</Text>
