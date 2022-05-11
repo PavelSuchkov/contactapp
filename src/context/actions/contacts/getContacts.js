@@ -11,13 +11,12 @@ export const getContacts = () => (dispatch) => {
     type: GET_CONTACTS_LOADING,
 
   });
-  axios.get('/contacts')
+  axios.get('/contacts/')
     .then(res => {
       dispatch({
         type: GET_CONTACTS_SUCCESS,
         payload: res.data,
       });
-      // console.log('res.data ===>  ', res.data);
     })
     .catch(error => {
       dispatch({
