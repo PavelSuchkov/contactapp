@@ -44,7 +44,6 @@ export const AppModal = ({
             }
           </ScrollView>
         </View>
-
       </TouchableOpacity>
 
     </Modal>
