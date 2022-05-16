@@ -17,7 +17,6 @@ export const Contacts = () => {
     },
   } = useContext(GlobalContext);
 
-  // console.log('contactsState ===>  ', contactsState);
 
   useEffect(() => {
     getContacts()(contactsDispatch)

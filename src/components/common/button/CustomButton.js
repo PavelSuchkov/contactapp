@@ -13,7 +13,7 @@ export const CustomButton = ({
                                danger,
                              }) => {
 
-  const getBgcolor = () => {
+  const getBgColor = () => {
     if (disabled) {
       return colors.grey;
     }
@@ -31,7 +31,7 @@ export const CustomButton = ({
   return (
     <TouchableOpacity disabled={disabled}
                       onPress={onPress}
-                      style={[styles.wrapper, { backgroundColor: getBgcolor() }]}>
+                      style={[styles.wrapper, { backgroundColor: getBgColor() }]}>
       <View style={[styles.loaderSection]}>
         {loading &&
           <ActivityIndicator color={primary ? colors.white : colors.primary} />}
