@@ -22,5 +22,16 @@ export default StyleSheet.create({
    opacity: 0.6,
     fontSize: 14,
     paddingVertical: 5
+  },
+  floatingActionButton: {
+    backgroundColor: colors.primary,
+    width: 55,
+    height: 55,
+    position: 'absolute',
+    bottom: 45,
+    right: 10,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
