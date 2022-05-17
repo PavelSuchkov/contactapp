@@ -1,10 +1,15 @@
-import { GET_CONTACTS_FAILED, GET_CONTACTS_LOADING, GET_CONTACTS_SUCCESS } from '../../constants/actionTypes/actions';
+import {
+  CREATE_CONTACT_FAILED,
+  CREATE_CONTACT_LOADING, CREATE_CONTACT_SUCCESS,
+  GET_CONTACTS_FAILED,
+  GET_CONTACTS_LOADING,
+  GET_CONTACTS_SUCCESS,
+} from '../../constants/actionTypes/actions';
 
 const contactsReducer = (state, { type, payload }) => {
   switch (type) {
 
     case GET_CONTACTS_LOADING:
-      console.log('reducer GET_CONTACTS_Loading called ====>');
       return {
         ...state,
         getContacts: {
@@ -15,7 +20,6 @@ const contactsReducer = (state, { type, payload }) => {
       };
 
     case GET_CONTACTS_SUCCESS:
-      console.log('reducer GET_CONTACTS_SUCCESS ====>', payload);
       return {
         ...state,
         getContacts: {
@@ -27,11 +31,47 @@ const contactsReducer = (state, { type, payload }) => {
       };
 
     case GET_CONTACTS_FAILED:
-      console.log('reducer GET_CONTACTS_FAILED ====>', payload);
       return {
         ...state,
         getContacts: {
           ...state.getContacts,
+          loading: false,
+          error: payload,
+        },
+      };
+
+    case CREATE_CONTACT_LOADING:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
+          loading: true,
+          error: null,
+        },
+      };
+
+    case CREATE_CONTACT_SUCCESS:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
+          loading: false,
+          data: payload,
+          error: null,
+        },
+        getContacts: {
+          ...state.getContacts,
+          loading: false,
+          data: [payload, ...state.getContacts.data],
+          error: null,
+        },
+      };
+
+    case CREATE_CONTACT_FAILED:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
           loading: false,
           error: payload,
         },

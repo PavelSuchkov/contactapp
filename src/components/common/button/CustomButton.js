@@ -39,7 +39,7 @@ export const CustomButton = ({
           <Text style={{
             color: disabled ? 'black' : colors.white,
             paddingLeft: loading ? 5 : 0,
-          }}>{title}</Text>}
+          }}>{loading ? 'Please wait...' : title}</Text>}
       </View>
 
     </TouchableOpacity>

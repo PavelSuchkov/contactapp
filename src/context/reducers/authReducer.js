@@ -10,14 +10,12 @@ const authReducer = (state, { type, payload }) => {
   switch (type) {
     case REGISTER_LOADING:
     case LOGIN_LOADING:
-      console.log('REGISTER_LOADING ', state);
       return {
         ...state,
         loading: true,
       };
 
     case REGISTER_SUCCESS:
-      console.log('REGISTER_SUCCESS ', state);
       return {
         ...state,
         loading: false,
@@ -25,7 +23,6 @@ const authReducer = (state, { type, payload }) => {
       };
 
     case LOGIN_SUCCESS:
-      console.log('LOGIN_SUCCESS ', state);
       return {
         ...state,
         loading: false,
@@ -45,16 +42,13 @@ const authReducer = (state, { type, payload }) => {
 
     case REGISTER_FAILED:
     case LOGIN_FAILED:
-      console.log('REGISTER_FAILED ', state);
       return {
         ...state,
         loading: false,
         error: payload,
-
       };
 
     case CLEAR_AUTH_STATE:
-      console.log('CLEAR_AUTH_STATE ', state);
       return {
         ...state,
         loading: false,
