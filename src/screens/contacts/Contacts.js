@@ -13,14 +13,14 @@ export const Contacts = () => {
   const {
     contactsDispatch,
     contactsState: {
-      getContacts: { data, loading }
+      getContacts: { data, loading },
     },
   } = useContext(GlobalContext);
 
 
   useEffect(() => {
-    getContacts()(contactsDispatch)
-  }, [])
+    getContacts()(contactsDispatch);
+  }, []);
 
   useEffect(() => {
     setOptions({
@@ -34,16 +34,11 @@ export const Contacts = () => {
   }, []);
 
   return (
-    <View>
-      <ContactsComponent modalVisible={modalVisible}
-                         setModalVisible={setModalVisible}
-                         data={data}
-                         loading={loading}
+      <ContactsComponent
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        data={data}
+        loading={loading}
       />
-    </View>
-    // <Container>
-    //   <Text>Hi from contacts</Text>
-    // </Container>
-
   );
 };

@@ -13,113 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading }) => {
 
   const { navigate } = useNavigation();
-  const phoneNumbers = [
-    {
-      id: '1',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '2',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '3',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '4',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '5',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '6',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '11',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '12',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '13',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '14',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '15',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '16',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
-    {
-      id: '17',
-      first_name: 'PSs',
-      last_name: 'Sdsd',
-      country_code: '+375',
-      phone_number: '34345345435345',
-      contact_picture: null,
-    },
 
-  ];
 
   const ListEmptyComponent = () => {
     return (
@@ -128,15 +22,12 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
       </View>
     );
   };
-
   const renderItem = ({ item }) => {
     const {
-      id,
       first_name,
       last_name,
       phone_number,
       country_code,
-      is_favorite,
       contact_picture,
     } = item;
     return (
@@ -144,27 +35,27 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
         <View style={styles.item}>
           {contact_picture
             ? (<Image
-              style={{
-                width: 45,
-                height: 45,
-                borderRadius: 100,
-              }} source={{ uri: contact_picture }}
-            />)
-            :
-            (<View
-              style={{
-                width: 45,
-                height: 45,
-                backgroundColor: colors.grey,
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 100,
-              }}
-            >
-              <Text style={[styles.name, { color: colors.white }]}>{first_name[0]}</Text>
-              <Text style={[styles.name, { color: colors.white }]}>{last_name[0]}</Text>
-            </View>)}
+                style={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 100,
+                }} source={{ uri: contact_picture }}
+              />
+            ) : (
+              <View
+                style={{
+                  width: 45,
+                  height: 45,
+                  backgroundColor: colors.grey,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 100,
+                }}
+              >
+                <Text style={[styles.name, { color: colors.white }]}>{first_name?.[0].toUpperCase()}</Text>
+                <Text style={[styles.name, { color: colors.white }]}>{last_name?.[0].toUpperCase()}</Text>
+              </View>)}
 
           <View style={{ paddingLeft: 20 }}>
             <View style={{ flexDirection: 'row' }}>
@@ -179,10 +70,9 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
       </TouchableOpacity>
     );
   };
-
   return (
     <>
-      <View style={{ backgroundColor: colors.white }}>
+      <View style={{ backgroundColor: colors.white, height: '100%' }}>
         <AppModal visible={modalVisible}
                   setModalVisible={setModalVisible}
                   modalBody={
@@ -203,7 +93,7 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
           <View style={{ paddingVertical: 20 }}>
             <FlatList
               ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: colors.grey }} />}
-              data={phoneNumbers}
+              data={data}
               renderItem={renderItem}
               keyExtractor={(item) => String(item.id)}
               ListEmptyComponent={ListEmptyComponent}
