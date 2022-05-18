@@ -1,26 +1,34 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, View, Switch, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { Container } from '../../common/container/Container';
 import { Input } from '../../common/input/Input';
 import CountryPicker from 'react-native-country-picker-modal';
 import { CustomButton } from '../../common/button/CustomButton';
 import { DEFAULT_IMAGE_URI } from '../../../constants/general';
+import colors from '../../../assets/theme/colors';
+import { ImagePicker } from '../../common/imagePicker/ImagePicker';
 
 export const CreateContactComponent = ({
                                          onChangeText,
+                                         toggleValueChange,
                                          form,
                                          onSubmit,
                                          setForm,
                                          loading,
                                          error,
+                                         sheetRef,
+                                         openSheet,
+                                         closeSheet,
                                        }) => {
   return (
     <View style={styles.container}>
 
       <Container>
         <Image source={{ uri: DEFAULT_IMAGE_URI }} style={styles.imageView} />
-        <Text style={styles.chooseText}>Choose image</Text>
+        <TouchableOpacity onPress={openSheet}>
+          <Text style={styles.chooseText}>Choose image</Text>
+        </TouchableOpacity>
         <Input label="First name"
                placeholder="Enter First Name"
                error={error?.first_name?.[0]}
@@ -59,6 +67,24 @@ export const CreateContactComponent = ({
             />
           }
         />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 15,
+          }}>
+          <Text style={{ fontSize: 17 }}>
+            Add to favorites
+          </Text>
+          <Switch
+            trackColor={{ false: 'blue', true: colors.primary }}
+            thumbColor={colors.white}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleValueChange}
+            value={form.isFavorite}
+          />
+        </View>
         <CustomButton
           primary
           title="Submit"
@@ -67,6 +93,7 @@ export const CreateContactComponent = ({
           disabled={loading}
         />
       </Container>
+      <ImagePicker ref={sheetRef} />
     </View>
   );
 };
