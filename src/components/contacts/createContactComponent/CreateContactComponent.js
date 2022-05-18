@@ -1,14 +1,16 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, View, Switch } from 'react-native';
 import styles from './styles';
 import { Container } from '../../common/container/Container';
 import { Input } from '../../common/input/Input';
 import CountryPicker from 'react-native-country-picker-modal';
 import { CustomButton } from '../../common/button/CustomButton';
 import { DEFAULT_IMAGE_URI } from '../../../constants/general';
+import colors from '../../../assets/theme/colors';
 
 export const CreateContactComponent = ({
                                          onChangeText,
+                                         toggleValueChange,
                                          form,
                                          onSubmit,
                                          setForm,
@@ -59,6 +61,24 @@ export const CreateContactComponent = ({
             />
           }
         />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 15,
+          }}>
+          <Text style={{ fontSize: 17 }}>
+            Add to favorites
+          </Text>
+          <Switch
+            trackColor={{ false: 'blue', true: colors.primary }}
+            thumbColor={colors.white}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleValueChange}
+            value={form.isFavorite}
+          />
+        </View>
         <CustomButton
           primary
           title="Submit"

@@ -18,6 +18,10 @@ export const CreateContact = () => {
     setForm({ ...form, [name]: value });
   };
 
+  const toggleValueChange = () => {
+    setForm({ ...form, isFavorite: !form.isFavorite });
+  }
+
   const onSubmit = () => {
     createContact(form)(contactsDispatch)(() => {
       navigate(CONTACT_LIST)
@@ -32,6 +36,7 @@ export const CreateContact = () => {
       setForm={setForm}
       loading={loading}
       error={error}
+      toggleValueChange={toggleValueChange}
     />
   );
 };

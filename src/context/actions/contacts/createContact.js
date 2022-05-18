@@ -14,7 +14,7 @@ export const createContact = (form) => (dispatch) => (onSuccess) => {
     last_name: form.lastName || '',
     phone_number: form.phoneNumber || '',
     // contact_picture: form.contactPicture || null,
-    is_favorite: false,
+    is_favorite: form.isFavorite || false,
   };
   dispatch({
     type: CREATE_CONTACT_LOADING,
