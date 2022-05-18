@@ -1,7 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { AppModal } from '../common/modal/AppModal';
-import { CustomButton } from '../common/button/CustomButton';
 import { Message } from '../common/message/Message';
 import colors from '../../assets/theme/colors';
 import { Icon } from '../common/icons/Icon';
