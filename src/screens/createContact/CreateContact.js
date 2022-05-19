@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 export const CreateContact = () => {
 
   const [form, setForm] = useState({});
+  const [localFile, setLocalFile] = useState(null);
   const { navigate, setOptions } = useNavigation();
   const {
     contactsDispatch,
@@ -42,6 +43,12 @@ export const CreateContact = () => {
     });
   };
 
+  const onFileSelected = (image) => {
+    closeSheet();
+    setLocalFile(image);
+    console.log('image', image);
+  };
+
   return (
     <CreateContactComponent
       onChangeText={onChange}
@@ -54,6 +61,8 @@ export const CreateContact = () => {
       sheetRef={sheetRef}
       openSheet={openSheet}
       closeSheet={closeSheet}
+      onFileSelected={onFileSelected}
+      localFile={localFile}
     />
   );
 };

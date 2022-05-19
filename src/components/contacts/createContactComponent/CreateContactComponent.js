@@ -7,7 +7,7 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { CustomButton } from '../../common/button/CustomButton';
 import { DEFAULT_IMAGE_URI } from '../../../constants/general';
 import colors from '../../../assets/theme/colors';
-import { ImagePicker } from '../../common/imagePicker/ImagePicker';
+import { ImagePickerComponent } from '../../common/imagePicker/ImagePickerComponent';
 
 export const CreateContactComponent = ({
                                          onChangeText,
@@ -19,13 +19,15 @@ export const CreateContactComponent = ({
                                          error,
                                          sheetRef,
                                          openSheet,
-                                         closeSheet,
+                                         localFile,
+                                         onFileSelected,
                                        }) => {
+  console.log('localFile ', localFile);
   return (
     <View style={styles.container}>
 
       <Container>
-        <Image source={{ uri: DEFAULT_IMAGE_URI }} style={styles.imageView} />
+        <Image source={{ uri:  localFile?.path || DEFAULT_IMAGE_URI }} style={styles.imageView} />
         <TouchableOpacity onPress={openSheet}>
           <Text style={styles.chooseText}>Choose image</Text>
         </TouchableOpacity>
@@ -93,7 +95,9 @@ export const CreateContactComponent = ({
           disabled={loading}
         />
       </Container>
-      <ImagePicker ref={sheetRef} />
+      <ImagePickerComponent
+        onFileSelected={onFileSelected}
+        ref={sheetRef}  />
     </View>
   );
 };
