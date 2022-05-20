@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { SettingsComponent } from '../../components/settings/SettingsComponent';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Settings = () => {
 
-  const [email, setEmail] = React.useState(null);
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [sortBy, setSortBy] = React.useState(null);
+  const [email, setEmail] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [sortBy, setSortBy] = useState(null);
+
+  const saveSettings = (key, value) => {
+    AsyncStorage.setItem(key, value);
+  };
 
   const settingsOptions = [
     {
@@ -56,8 +61,48 @@ export const Settings = () => {
     },
   ];
 
+  const prefArr = [
+    {
+      name: 'First Name',
+      selected: sortBy === 'First Name',
+      onPress: () => {
+        saveSettings('sortBy', 'First Name');
+        setSortBy('First Name');
+        setModalVisible(false)
+      },
+    },
+    {
+      name: 'Last Name',
+      selected: sortBy === 'Last Name',
+      onPress: () => {
+        saveSettings('sortBy', 'Last Name');
+        setSortBy('Last Name');
+        setModalVisible(false)
+      },
+    },
+  ];
+
+  const getSettings = async () => {
+    const user = await AsyncStorage.getItem('user');
+    setEmail(JSON.parse(user).email);
+
+    const sortPref = await AsyncStorage.getItem('sortBy');
+    if (sortPref) {
+      setSortBy(sortPref);
+    }
+    console.log(JSON.parse(user));
+  };
+
+  useEffect(() => {
+    getSettings();
+  }, []);
 
   return (
-    <SettingsComponent settingsOptions={settingsOptions} />
+    <SettingsComponent
+      settingsOptions={settingsOptions}
+      setModalVisible={setModalVisible}
+      modalVisible={modalVisible}
+      prefArr={prefArr}
+    />
   );
 };
