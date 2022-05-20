@@ -18,7 +18,6 @@ export const loginUser = ({
   })
 
     .then(res => {
-      console.log('res ', res.data);
       AsyncStorage.setItem('token', res.data.token)
       AsyncStorage.setItem('user', JSON.stringify(res.data.user))
       dispatch({
@@ -27,7 +26,6 @@ export const loginUser = ({
       });
       onSuccess(res.data);
     }).catch((err) => {
-    console.log('error ', err.response);
     dispatch({
       type: LOGIN_FAILED,
       payload: err.response
