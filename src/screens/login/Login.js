@@ -10,10 +10,7 @@ export const Login = () => {
   const [errors, setErrors] = useState({});
   const [justSignedUp, setJustSignedUp] = useState(false);
 
-  // const route = useRoute();
   const { params } = useRoute();
-
-  // console.log(route);
 
   useEffect(() => {
     if (params?.data)

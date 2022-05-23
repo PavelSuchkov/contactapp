@@ -6,6 +6,7 @@ import { GlobalContext } from '../context/Provider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from 'react-native';
 import colors from '../assets/theme/colors';
+import { navigationRef } from './RootNavigator';
 
 
 export const AppNavContainer = () => {
@@ -41,7 +42,7 @@ export const AppNavContainer = () => {
   return (
     <>
       {authLoaded ? (
-          <NavigationContainer>
+          <NavigationContainer ref={navigationRef}>
             {
               isAuth
                 ? <DrawerNavigator />

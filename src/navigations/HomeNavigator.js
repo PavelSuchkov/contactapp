@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { CONTACT_DETAIL, CONTACT_LIST, CREATE_CONTACT, SETTINGS } from '../constants/routeNames';
+import { CONTACT_DETAIL, CONTACT_LIST, CREATE_CONTACT, LOGOUT, SETTINGS } from '../constants/routeNames';
 import { Contacts } from '../screens/contacts/Contacts';
 import { ContactDetails } from '../screens/contactDetail/ContactDetails';
 import { CreateContact } from '../screens/createContact/CreateContact';
 import { Settings } from '../screens/settings/Settings';
-import { Text } from 'react-native';
+import { Logout } from '../screens/logout/Logout';
 
 
 export const HomeNavigator = () => {
@@ -18,6 +18,7 @@ export const HomeNavigator = () => {
       <HomeStack.Screen name={CONTACT_DETAIL} component={ContactDetails} />
       <HomeStack.Screen name={CREATE_CONTACT} component={CreateContact} />
       <HomeStack.Screen name={SETTINGS} component={Settings} />
+      <HomeStack.Screen name={LOGOUT} component={Logout} />
     </HomeStack.Navigator>
   );
 };

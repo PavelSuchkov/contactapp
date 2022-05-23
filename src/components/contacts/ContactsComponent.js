@@ -10,8 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export const ContactsComponent = ({
-                                    // modalVisible,
-                                    // setModalVisible,
                                     data,
                                     loading,
                                     sortBy,

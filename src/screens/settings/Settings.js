@@ -85,12 +85,10 @@ export const Settings = () => {
   const getSettings = async () => {
     const user = await AsyncStorage.getItem('user');
     setEmail(JSON.parse(user).email);
-
     const sortPref = await AsyncStorage.getItem('sortBy');
     if (sortPref) {
       setSortBy(sortPref);
     }
-    console.log(JSON.parse(user));
   };
 
   useEffect(() => {
