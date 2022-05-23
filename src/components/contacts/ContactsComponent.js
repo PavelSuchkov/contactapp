@@ -9,7 +9,13 @@ import { CREATE_CONTACT } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 
 
-export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading }) => {
+export const ContactsComponent = ({
+                                    // modalVisible,
+                                    // setModalVisible,
+                                    data,
+                                    loading,
+                                    sortBy,
+                                  }) => {
 
   const { navigate } = useNavigation();
 
@@ -72,15 +78,6 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
   return (
     <>
       <View style={{ backgroundColor: colors.white, height: '100%' }}>
-        <AppModal visible={modalVisible}
-                  setModalVisible={setModalVisible}
-                  modalBody={
-                    <View>
-                      <Text>Hello from the modal window</Text>
-                    </View>}
-                  title="My profile"
-        />
-        {/*<CustomButton onPress={() => setModalVisible(true)} title='button' secondary/>*/}
         {
           loading &&
           <View style={{ paddingVertical: 100, paddingHorizontal: 100 }}>
@@ -92,7 +89,22 @@ export const ContactsComponent = ({ modalVisible, setModalVisible, data, loading
           <View style={{ paddingVertical: 20 }}>
             <FlatList
               ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: colors.grey }} />}
-              data={data}
+              data={
+                sortBy
+                  ? data.sort((a, b) => {
+                    if(sortBy === 'First Name') {
+                      if (b.first_name > a.first_name) {
+                        return -1
+                      } else  return 1
+                    }
+                    if(sortBy === 'Last Name') {
+                      if (b.last_name > a.last_name) {
+                        return -1
+                      } else  return 1
+                    }
+                  })
+                  : data
+              }
               renderItem={renderItem}
               keyExtractor={(item) => String(item.id)}
               ListEmptyComponent={ListEmptyComponent}
