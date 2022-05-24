@@ -1,4 +1,4 @@
-package com.contactapp;
+package com.pavelsuchkou.contactapp;
 
 import com.facebook.react.ReactActivity;
 // import android.os.Bundle;

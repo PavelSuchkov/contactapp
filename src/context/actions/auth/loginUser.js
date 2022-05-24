@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const loginUser = ({
                         password,
                         username,
-                      }) => (dispatch) => (onSuccess) => {
+                      }) => (dispatch) => {
   dispatch({ type: LOGIN_LOADING });
   axiosInstance.post('auth/login', {
     password,
@@ -24,7 +24,7 @@ export const loginUser = ({
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
-      onSuccess(res.data);
+
     }).catch((err) => {
     dispatch({
       type: LOGIN_FAILED,

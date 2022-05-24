@@ -4,10 +4,12 @@ import { createContact } from '../../context/actions/contacts/createContact';
 import { GlobalContext } from '../../context/Provider';
 import { CONTACT_LIST } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
+import { uploadImage } from '../../helpers/uploadImage';
 
 export const CreateContact = () => {
 
   const [form, setForm] = useState({});
+  const [uploading, setIsUploading] = useState(false);
   const [localFile, setLocalFile] = useState(null);
   const { navigate, setOptions } = useNavigation();
   const {
@@ -38,6 +40,20 @@ export const CreateContact = () => {
   };
 
   const onSubmit = () => {
+    if(localFile?.size){
+      setIsUploading(true)
+      uploadImage(localFile)
+      ((url) => {
+        createContact({ ...form, contactPicture: url })(contactsDispatch)(() => {
+          navigate(CONTACT_LIST);
+          setIsUploading(false)
+        })
+      })
+      ((error) => {
+        console.log('error ', error);
+        setIsUploading(false)
+      })
+    }
     createContact(form)(contactsDispatch)(() => {
       navigate(CONTACT_LIST);
     });
@@ -46,7 +62,7 @@ export const CreateContact = () => {
   const onFileSelected = (image) => {
     closeSheet();
     setLocalFile(image);
-    console.log('image', image);
+    // console.log('image', image);
   };
 
   return (
@@ -55,7 +71,7 @@ export const CreateContact = () => {
       form={form}
       onSubmit={onSubmit}
       setForm={setForm}
-      loading={loading}
+      loading={loading || uploading}
       error={error}
       toggleValueChange={toggleValueChange}
       sheetRef={sheetRef}

@@ -51,7 +51,7 @@ export const Login = () => {
   };
   const onSubmit = () => {
     if (form.username && form.password) {
-      loginUser(form)(authDispatch)((response) => console.log('success,', response));
+      loginUser(form)(authDispatch);
     }
   };
 
