@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "210196478806",
+    "project_id": "rncontacts-4b403",
+    "storage_bucket": "rncontacts-4b403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210196478806:android:14ac967871951731c934f7",
+        "android_client_info": {
+          "package_name": "com.pavelsuchkou.contactapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210196478806-8ee09cfgkanu2fpc862mbenik8alcjpk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnoQE2w6e45sKLvKWDDL_JMqC2x_Vgnbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210196478806-8ee09cfgkanu2fpc862mbenik8alcjpk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "210196478806-tb69ef8p4da9sthd2b36lsvs917rigjm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.PavelSuchkou.contactapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
