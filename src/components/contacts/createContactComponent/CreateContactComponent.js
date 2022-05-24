@@ -22,7 +22,6 @@ export const CreateContactComponent = ({
                                          localFile,
                                          onFileSelected,
                                        }) => {
-  console.log('localFile ', localFile);
   return (
     <View style={styles.container}>
 
