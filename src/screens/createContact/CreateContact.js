@@ -42,8 +42,7 @@ export const CreateContact = () => {
   const onSubmit = () => {
     if(localFile?.size){
       setIsUploading(true)
-      uploadImage(localFile)
-      ((url) => {
+      uploadImage(localFile)((url) => {
         createContact({ ...form, contactPicture: url })(contactsDispatch)(() => {
           navigate(CONTACT_LIST);
           setIsUploading(false)
@@ -53,16 +52,16 @@ export const CreateContact = () => {
         console.log('error ', error);
         setIsUploading(false)
       })
+    } else {
+      createContact(form)(contactsDispatch)(() => {
+        navigate(CONTACT_LIST);
+      });
     }
-    createContact(form)(contactsDispatch)(() => {
-      navigate(CONTACT_LIST);
-    });
   };
 
   const onFileSelected = (image) => {
     closeSheet();
     setLocalFile(image);
-    // console.log('image', image);
   };
 
   return (
