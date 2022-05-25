@@ -15,7 +15,6 @@ export const Login = () => {
   useEffect(() => {
     if (params?.data)
     {
-      console.log('params ===> ', params.data);
       setForm({...form, username: params?.data.username})
       setJustSignedUp(true)
     }

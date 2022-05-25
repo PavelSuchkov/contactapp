@@ -5,8 +5,8 @@ import { Message } from '../common/message/Message';
 import colors from '../../assets/theme/colors';
 import { Icon } from '../common/icons/Icon';
 import styles from './styles';
-import { CREATE_CONTACT } from '../../constants/routeNames';
-import { useNavigation } from '@react-navigation/native';
+import { CONTACT_DETAIL, CREATE_CONTACT } from '../../constants/routeNames';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 
 export const ContactsComponent = ({
@@ -16,7 +16,6 @@ export const ContactsComponent = ({
                                   }) => {
 
   const { navigate } = useNavigation();
-
 
   const ListEmptyComponent = () => {
     return (
@@ -34,7 +33,11 @@ export const ContactsComponent = ({
       contact_picture,
     } = item;
     return (
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity style={styles.itemContainer}
+                        onPress={() => {
+                          navigate(CONTACT_DETAIL, { item });
+                        }}
+      >
         <View style={styles.item}>
           {contact_picture
             ? (<Image
@@ -90,15 +93,15 @@ export const ContactsComponent = ({
               data={
                 sortBy
                   ? data.sort((a, b) => {
-                    if(sortBy === 'First Name') {
-                      if (b.first_name > a.first_name) {
-                        return -1
-                      } else  return 1
+                    if (sortBy === 'First Name') {
+                      if (b.first_name.toUpperCase() > a.first_name.toUpperCase()) {
+                        return -1;
+                      } else return 1;
                     }
-                    if(sortBy === 'Last Name') {
-                      if (b.last_name > a.last_name) {
-                        return -1
-                      } else  return 1
+                    if (sortBy === 'Last Name') {
+                      if (b.last_name.toUpperCase() > a.last_name.toUpperCase()) {
+                        return -1;
+                      } else return 1;
                     }
                   })
                   : data
