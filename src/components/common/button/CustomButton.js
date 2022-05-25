@@ -11,6 +11,7 @@ export const CustomButton = ({
                                secondary,
                                onPress,
                                danger,
+                               style,
                              }) => {
 
   const getBgColor = () => {
@@ -31,7 +32,7 @@ export const CustomButton = ({
   return (
     <TouchableOpacity disabled={disabled}
                       onPress={onPress}
-                      style={[styles.wrapper, { backgroundColor: getBgColor() }]}>
+                      style={[styles.wrapper, { backgroundColor: getBgColor() }, style]}>
       <View style={[styles.loaderSection]}>
         {loading &&
           <ActivityIndicator color={primary ? colors.white : colors.primary} />}

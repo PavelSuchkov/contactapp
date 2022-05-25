@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { ContactDetailsComponent } from '../../components/contactDetails/ContactDetailsComponent';
 
 export const ContactDetails = () => {
+  const { params: {item = {}} = {} } = useRoute();
+
   return (
-    <View>
-      <Text>Hi from contact Detail</Text>
-    </View>
+    <ContactDetailsComponent contact={item}/>
   );
 };
