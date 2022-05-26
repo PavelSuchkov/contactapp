@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from '../common/container/Container';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { ImageComponent } from './ImageComponent';
@@ -67,7 +66,7 @@ export const ContactDetailsComponent = ({ contact }) => {
             size={27}
           />
           <View style={styles.phoneMobile}>
-            <Text>{phone_number}</Text>
+            <Text>{country_code + ' ' + phone_number}</Text>
             <Text>Mobile</Text>
           </View>
 
