@@ -29,7 +29,6 @@ export const SideMenu = ( {navigation, authDispatch} ) => {
 
   const menuItems = [
     {
-      // icon: <SettingsIcon name='settings-outline' size={25}/>,
       icon: <Icon type='ionicon' name='settings-outline' size={25}/>,
       name: 'Settings',
       onPress: () => {
@@ -38,7 +37,6 @@ export const SideMenu = ( {navigation, authDispatch} ) => {
       },
     },
     {
-      // icon: <LogoutIcon name='logout' size={25}/>,
       icon: <Icon type='material' name='logout' size={25}/>,
       name: 'Logout',
       onPress: logOutHandler

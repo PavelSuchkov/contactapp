@@ -20,53 +20,56 @@ export const CreateContactComponent = ({
                                          sheetRef,
                                          openSheet,
                                          localFile,
-                                         onFileSelected,
+                                         onFileSelected
                                        }) => {
   return (
     <View style={styles.container}>
 
       <Container>
-        <Image source={{ uri:  localFile?.path || DEFAULT_IMAGE_URI }} style={styles.imageView} />
+        <Image source={{ uri: localFile?.path || localFile || DEFAULT_IMAGE_URI }} style={styles.imageView} />
         <TouchableOpacity onPress={openSheet}>
           <Text style={styles.chooseText}>Choose image</Text>
         </TouchableOpacity>
-        <Input label="First name"
+        <Input value={form.firstName || ''}
+               label="First name"
                placeholder="Enter First Name"
                error={error?.first_name?.[0]}
                changeText={(value) => {
                  onChangeText({ name: 'firstName', value: value });
-               }} />
-        <Input label="Last name"
+               }}
+        />
+        <Input value={form.lastName || ''}
+               label="Last name"
                placeholder="Enter Last Name"
                error={error?.last_name?.[0]}
                changeText={(value) => {
                  onChangeText({ name: 'lastName', value: value });
                }} />
-        <Input
-          label="Phone number"
-          placeholder="Enter phone number"
-          iconPosition="left"
-          style={{ paddingLeft: 10 }}
-          error={error?.phone_number?.[0]}
-          changeText={(value) => {
-            onChangeText({ name: 'phoneNumber', value: value });
-          }}
-          icon={
-            <CountryPicker
-              withFilter
-              withFlag
-              countryCode={!form ? undefined : form.countryCode}
-              withCountryNameButton={false}
-              withCallingCode
-              withCallingCodeButton
-              withEmoji
-              onSelect={(v) => {
-                const phoneCode = v.callingCode[0];
-                const cCode = v.cca2;
-                setForm({ ...form, phoneCode, countryCode: cCode });
-              }}
-            />
-          }
+        <Input value={form.phoneNumber || ''}
+               label="Phone number"
+               placeholder="Enter phone number"
+               iconPosition="left"
+               style={{ paddingLeft: 10 }}
+               error={error?.phone_number?.[0]}
+               changeText={(value) => {
+                 onChangeText({ name: 'phoneNumber', value: value });
+               }}
+               icon={
+                 <CountryPicker
+                   withFilter
+                   withFlag
+                   countryCode={!form ? undefined : form.countryCode}
+                   withCountryNameButton={false}
+                   withCallingCode
+                   withCallingCodeButton
+                   withEmoji
+                   onSelect={(v) => {
+                     const phoneCode = v.callingCode[0];
+                     const cCode = v.cca2;
+                     setForm({ ...form, phoneCode, countryCode: cCode });
+                   }}
+                 />
+               }
         />
         <View
           style={{
@@ -96,7 +99,7 @@ export const CreateContactComponent = ({
       </Container>
       <ImagePickerComponent
         onFileSelected={onFileSelected}
-        ref={sheetRef}  />
+        ref={sheetRef} />
     </View>
   );
 };

@@ -18,6 +18,8 @@ export const ContactDetailsComponent = ({ contact }) => {
     contact_picture,
   } = contact;
 
+
+
   const { navigate } = useNavigation();
 
   return (
