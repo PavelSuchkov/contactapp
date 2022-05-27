@@ -10,8 +10,6 @@ import { CONTACT_DETAIL } from '../../constants/routeNames';
 import { navigate } from '../../navigations/RootNavigator';
 
 export const Contacts = ( ) => {
-
-
   const { setOptions, toggleDrawer } = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [sortBy, setSortBy] = useState(null);
@@ -38,6 +36,7 @@ export const Contacts = ( ) => {
   useFocusEffect(
     useCallback(() => {
       getSettings();
+      getContacts()(contactsDispatch);  // костыль
       return () => {
       };
     }, []),

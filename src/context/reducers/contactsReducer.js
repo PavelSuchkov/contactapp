@@ -1,6 +1,13 @@
 import {
   CREATE_CONTACT_FAILED,
-  CREATE_CONTACT_LOADING, CREATE_CONTACT_SUCCESS, DELETE_CONTACT_FAILED, DELETE_CONTACT_LOADING, DELETE_CONTACT_SUCCESS,
+  CREATE_CONTACT_LOADING,
+  CREATE_CONTACT_SUCCESS,
+  DELETE_CONTACT_FAILED,
+  DELETE_CONTACT_LOADING,
+  DELETE_CONTACT_SUCCESS,
+  EDIT_CONTACT_FAILED,
+  EDIT_CONTACT_LOADING,
+  EDIT_CONTACT_SUCCESS,
   GET_CONTACTS_FAILED,
   GET_CONTACTS_LOADING,
   GET_CONTACTS_SUCCESS,
@@ -76,7 +83,7 @@ const contactsReducer = (state, { type, payload }) => {
           error: payload,
         },
       };
-      case DELETE_CONTACT_LOADING:
+    case DELETE_CONTACT_LOADING:
       return {
         ...state,
         deleteContact: {
@@ -107,6 +114,48 @@ const contactsReducer = (state, { type, payload }) => {
         ...state,
         deleteContact: {
           ...state.deleteContact,
+          loading: false,
+          error: payload,
+        },
+      };
+
+    case EDIT_CONTACT_LOADING:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
+          loading: true,
+          error: null,
+        },
+      };
+
+    case EDIT_CONTACT_SUCCESS:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
+          loading: false,
+          error: null,
+        },
+        getContacts: {
+          ...state.getContacts,
+          loading: false,
+          data: state.getContacts.data.map((item) => {
+            if (item.id === payload.id) {
+              return payload;
+            } else {
+              return item;
+            }
+          }),
+          error: null,
+        },
+      };
+
+    case EDIT_CONTACT_FAILED:
+      return {
+        ...state,
+        createContact: {
+          ...state.createContact,
           loading: false,
           error: payload,
         },
