@@ -12,6 +12,7 @@ import { CONTACT_LIST } from '../../constants/routeNames';
 export const ContactDetails = () => {
   const { params: { item = {} } = {} } = useRoute();
 
+  console.log();
   const {
     contactsDispatch,
     contactsState: { deleteContact: { loading } },
@@ -40,8 +41,7 @@ export const ContactDetails = () => {
                                     [
                                       {
                                         text: 'Cancel',
-                                        onPress: () => {
-                                        },
+                                        onPress: () => {},
                                         style: 'cancel',
                                       },
                                       {
