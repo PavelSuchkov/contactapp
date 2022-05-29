@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 import { ImageComponent } from './ImageComponent';
 import { CustomButton } from '../common/button/CustomButton';
@@ -7,8 +7,18 @@ import { Icon } from '../common/icons/Icon';
 import colors from '../../assets/theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { CREATE_CONTACT } from '../../constants/routeNames';
+import { DEFAULT_IMAGE_URI } from '../../constants/general';
+import { ImagePickerComponent } from '../common/imagePicker/ImagePickerComponent';
 
-export const ContactDetailsComponent = ({ contact }) => {
+export const ContactDetailsComponent = ({
+                                          contact,
+                                          onFileSelected,
+                                          sheetRef,
+                                          openSheet,
+                                          localFile,
+                                          updatingImage,
+                                          uploadSucceeded,
+                                        }) => {
 
   const {
     first_name,
@@ -19,13 +29,21 @@ export const ContactDetailsComponent = ({ contact }) => {
   } = contact;
 
 
-
   const { navigate } = useNavigation();
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        {contact_picture && <ImageComponent src={contact_picture} />}
+        {(contact_picture || uploadSucceeded) && (<ImageComponent src={contact_picture || localFile?.path} />)}
+        {!contact_picture && !uploadSucceeded && (
+          <View style={{ alignItems: 'center', paddingVertical: 20 }}>
+            <Image source={{ uri: localFile?.path || DEFAULT_IMAGE_URI }}
+                   style={styles.imageView} />
+            <TouchableOpacity onPress={() => openSheet()}>
+              <Text style={{ color: colors.primary }}>{updatingImage ? 'Updating...' : 'Add Picture'}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <View style={styles.content}>
           <Text style={styles.names}>{first_name + ' ' + last_name}</Text>
         </View>
@@ -94,14 +112,15 @@ export const ContactDetailsComponent = ({ contact }) => {
           </View>
         </View>
         <CustomButton
-          style={{alignSelf: 'flex-end', marginRight: 20, width: 200}}
+          style={{ alignSelf: 'flex-end', marginRight: 20, width: 200 }}
           primary
           title="Edit Contact"
           onPress={() => {
-            navigate(CREATE_CONTACT, {contact, editing: true});
+            navigate(CREATE_CONTACT, { contact, editing: true });
           }}
         />
       </View>
+      <ImagePickerComponent onFileSelected={onFileSelected} ref={sheetRef} />
     </ScrollView>
   );
 };

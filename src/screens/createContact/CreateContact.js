@@ -58,6 +58,7 @@ export const CreateContact = () => {
     if (params?.contact?.contact_picture) {
       setLocalFile(params?.contact.contact_picture);
     }
+    // return () => {}
   }, []);
 
   const closeSheet = () => {
@@ -72,6 +73,11 @@ export const CreateContact = () => {
     }
   };
 
+  const onFileSelected = (image) => {
+    closeSheet();
+    setLocalFile(image);
+  };
+
   const onChange = ({ name, value }) => {
     setForm({ ...form, [name]: value });
   };
@@ -79,6 +85,39 @@ export const CreateContact = () => {
   const toggleValueChange = () => {
     setForm({ ...form, isFavorite: !form.isFavorite });
   };
+
+  //
+  // const onFileSelected = (image) => {
+  //   closeSheet();
+  //   setLocalFile(image);
+  //   setUpdatingImage(true);
+  //   uploadImage(image)((url) => {
+  //     const {
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //       phone_number: phoneNumber,
+  //       country_code: phoneCode,
+  //       is_favorite: isFavorite,
+  //     } = item;
+  //     editContact(
+  //       {
+  //         firstName,
+  //         lastName,
+  //         phoneCode,
+  //         isFavorite,
+  //         phoneNumber,
+  //         contactPicture: url,
+  //       },
+  //       item.id
+  //     )(contactsDispatch)(() => {
+  //       setUpdatingImage(false);
+  //       setUploadSucceeded(true);
+  //     });
+  //   })((error) => {
+  //     console.log('error ', error);
+  //     setUpdatingImage(false);
+  //   });
+  // };
 
   const onSubmit = () => {
     if (params?.contact) {
@@ -121,12 +160,6 @@ export const CreateContact = () => {
       }
     }
   };
-
-  const onFileSelected = (image) => {
-    closeSheet();
-    setLocalFile(image);
-  };
-
   return (
     <CreateContactComponent
       onChangeText={onChange}
