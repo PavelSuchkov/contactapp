@@ -10,6 +10,7 @@ import { navigate } from '../../navigations/RootNavigator';
 import { CONTACT_LIST } from '../../constants/routeNames';
 import { uploadImage } from '../../helpers/uploadImage';
 import { editContact } from '../../context/actions/contacts/editContact';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const ContactDetails = () => {
   const { params: { item = {} } = {} } = useRoute();
@@ -24,7 +25,12 @@ export const ContactDetails = () => {
   const [localFile, setLocalFile] = useState(null);
   const [updatingImage, setUpdatingImage] = useState(false);
   const [uploadSucceeded, setUploadSucceeded] = useState(false);
+  const [userMail, setUserMail] = useState(null);
 
+
+  useEffect(() => {
+    getUserEmail();
+  }, []);
 
   useEffect(() => {
     if (item) {
@@ -35,7 +41,7 @@ export const ContactDetails = () => {
             <View style={{ flexDirection: 'row', paddingRight: 10 }}>
               <TouchableOpacity>
                 <Icon name={item.is_favorite ? 'star' : 'star-border'}
-                      type="material"
+                      type='material'
                       size={21}
                       color={colors.grey}
                 />
@@ -64,13 +70,13 @@ export const ContactDetails = () => {
                                 }}
               >
                 {!loading ? (
-                  <Icon name="delete"
-                        type="material"
+                  <Icon name='delete'
+                        type='material'
                         size={21}
                         color={colors.grey}
                   />
                 ) : (
-                  <ActivityIndicator size="small" color={colors.primary} true />
+                  <ActivityIndicator size='small' color={colors.primary} true />
                 )}
               </TouchableOpacity>
             </View>
@@ -93,11 +99,23 @@ export const ContactDetails = () => {
     }
   };
 
+  const getUserEmail = async () => {
+    try {
+      const user = await AsyncStorage.getItem('user');
+      if (user) {
+        const mail = JSON.parse(user).email;
+        setUserMail(mail);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onFileSelected = (image) => {
     closeSheet();
     setLocalFile(image);
     setUpdatingImage(true);
-    uploadImage(image)((url) => {
+    uploadImage(image, userMail)((url) => {
       const {
         first_name: firstName,
         last_name: lastName,

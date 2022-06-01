@@ -7,12 +7,14 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { uploadImage } from '../../helpers/uploadImage';
 import countryCodes from '../../utils/countryCodes';
 import { editContact } from '../../context/actions/contacts/editContact';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CreateContact = () => {
 
   const [form, setForm] = useState({});
   const [uploading, setIsUploading] = useState(false);
   const [localFile, setLocalFile] = useState(null);
+  const [userMail, setUserMail] = useState(null);
   const { navigate, setOptions } = useNavigation();
   const {
     contactsDispatch,
@@ -21,10 +23,14 @@ export const CreateContact = () => {
   const sheetRef = useRef(null);
   const { params } = useRoute();
 
+  useEffect( () => {
+    getUserEmail()
+  }, []);
+
 
   useEffect(() => {
     if (params?.contact) {
-      setOptions({title: 'Update Contact'})
+      setOptions({ title: 'Update Contact' });
       const {
         first_name: firstName,
         last_name: lastName,
@@ -58,7 +64,6 @@ export const CreateContact = () => {
     if (params?.contact?.contact_picture) {
       setLocalFile(params?.contact.contact_picture);
     }
-    // return () => {}
   }, []);
 
   const closeSheet = () => {
@@ -86,46 +91,26 @@ export const CreateContact = () => {
     setForm({ ...form, isFavorite: !form.isFavorite });
   };
 
-  //
-  // const onFileSelected = (image) => {
-  //   closeSheet();
-  //   setLocalFile(image);
-  //   setUpdatingImage(true);
-  //   uploadImage(image)((url) => {
-  //     const {
-  //       first_name: firstName,
-  //       last_name: lastName,
-  //       phone_number: phoneNumber,
-  //       country_code: phoneCode,
-  //       is_favorite: isFavorite,
-  //     } = item;
-  //     editContact(
-  //       {
-  //         firstName,
-  //         lastName,
-  //         phoneCode,
-  //         isFavorite,
-  //         phoneNumber,
-  //         contactPicture: url,
-  //       },
-  //       item.id
-  //     )(contactsDispatch)(() => {
-  //       setUpdatingImage(false);
-  //       setUploadSucceeded(true);
-  //     });
-  //   })((error) => {
-  //     console.log('error ', error);
-  //     setUpdatingImage(false);
-  //   });
-  // };
+  const getUserEmail = async () => {
+    try {
+      const user = await AsyncStorage.getItem('user');
+      if (user) {
+        const  mail = JSON.parse(user).email
+        setUserMail(mail)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
 
   const onSubmit = () => {
     if (params?.contact) {
       if (localFile?.size) {
         setIsUploading(true);
-        uploadImage(localFile)((url) => {
+        uploadImage(localFile, userMail)((url) => {
           editContact({ ...form, contactPicture: url }, params?.contact.id)(contactsDispatch)((item) => {
-            navigate(CONTACT_DETAIL, {item});
+            navigate(CONTACT_DETAIL, { item });
             setIsUploading(false);
           });
         })
@@ -135,14 +120,14 @@ export const CreateContact = () => {
         });
       } else {
         editContact(form, params?.contact.id)(contactsDispatch)((item) => {
-          navigate(CONTACT_DETAIL, {item});
+          navigate(CONTACT_DETAIL, { item });
           setIsUploading(false);
         });
       }
     } else {
       if (localFile?.size) {
         setIsUploading(true);
-        uploadImage(localFile)((url) => {
+        uploadImage(localFile, userMail)((url) => {
           createContact({ ...form, contactPicture: url })(contactsDispatch)(() => {
             navigate(CONTACT_LIST);
             setIsUploading(false);
