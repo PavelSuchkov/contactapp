@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { REGISTER } from '../../constants/routeNames';
 import { Message } from '../common/message/Message';
 import { GlobalContext } from '../../context/Provider';
+import {scale} from 'react-native-size-matters'
 
 export const LoginComponent = ({ form, onChange, onSubmit, loading, errors, justSignedUp }) => {
 
@@ -20,7 +21,7 @@ export const LoginComponent = ({ form, onChange, onSubmit, loading, errors, just
 
   return (
     <Container>
-      <Image width={70} height={70}
+      <Image width={scale(90)} height={scale(90)}
              source={require('../../assets/images/logo.png')}
              style={styles.logoImage} />
       <View>

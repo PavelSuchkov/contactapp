@@ -1,15 +1,12 @@
 import React, { forwardRef } from 'react';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Text, TouchableOpacity, View, NativeModules } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from '../icons/Icon';
 import styles from './styles';
 import colors from '../../../assets/theme/colors';
 import ImagePicker from 'react-native-image-crop-picker';
-// import * as ImagePicker from 'react-native-image-crop-picker';
 
 export const ImagePickerComponent = forwardRef(({ onFileSelected }, ref) => {
-
-  // const ImagePicker = NativeModules.ImageCropPicker;
 
   const options = [
     {
@@ -21,7 +18,6 @@ export const ImagePickerComponent = forwardRef(({ onFileSelected }, ref) => {
           height: 400,
           cropping: true,
         }).then(image => {
-          console.log('camera  ', image);
           onFileSelected(image);
         }).catch((error) => {
           console.log(error);
@@ -44,7 +40,6 @@ export const ImagePickerComponent = forwardRef(({ onFileSelected }, ref) => {
       },
     },
   ];
-  // console.log(ImagePicker);
   return (
     <RBSheet
       ref={ref}
@@ -55,8 +50,6 @@ export const ImagePickerComponent = forwardRef(({ onFileSelected }, ref) => {
         container: {
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-          // justifyContent: "center",
-          // alignItems: "center"
         },
       }}
     >
